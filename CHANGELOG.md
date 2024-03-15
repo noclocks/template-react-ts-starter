@@ -13,6 +13,7 @@
 
 ## Documentation
 
+- Tweak readme layout ([7990c32](https://github.com/noclocks/template-react-ts-starter/commit/7990c321dd468c123af85b0036093b330cc84f18))  - (Jimmy Briggs)
 - Initialize placeholder roadmap.md ([7a018e3](https://github.com/noclocks/template-react-ts-starter/commit/7a018e3852d476cc3227a705a6ce54a54ea59017))  - (Jimmy Briggs)
 - Add techstack.md to docs ([bd89785](https://github.com/noclocks/template-react-ts-starter/commit/bd8978561e60bab9a107e4105fe371ff7489737b))  - (Jimmy Briggs)
 - Update and enhance README ([5360c48](https://github.com/noclocks/template-react-ts-starter/commit/5360c48ae61b21dc5dee8a57878176555fca4b52))  - (Jimmy Briggs)
