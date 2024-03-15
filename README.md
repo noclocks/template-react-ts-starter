@@ -1,9 +1,25 @@
 # No Clocks Frontend Development Template
 
 > [!NOTE]
-> This project serves the purpose of scaffolding out a boilerplate setup using React, TypeScript, Vite, and our
-> preferred development environment tooling for frontend development. This project is not intended to be used as a
-> standalone project, but rather as a starting point for new projects.
+> This project serves the purpose of scaffolding out a boilerplate setup using [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/), and our preferred development environment tooling for frontend development.
+>
+> This project is not intended to be used as a standalone project, but rather as a starting point for new projects.
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Badges](#badges)
+- [Tech Stack](#tech-stack)
+- [Usage](#usage)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Testing](#testing)
+  - [Code Coverage](#code-coverage)
+  - [Linting](#linting)
+  - [Building](#building)
+
+## Badges
 
 <!-- BADGES:Start -->
 
@@ -27,7 +43,7 @@ This project uses the following technologies:
 - [React Router](https://reactrouter.com/) for routing
 - [GitHub Actions](./.github/workflows/): for CI/CD and testing automation
 
-## Getting Started
+## Usage
 
 To get started with this project, follow the instructions below.
 
