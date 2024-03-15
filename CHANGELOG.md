@@ -13,6 +13,9 @@
 
 ## Documentation
 
+- Initialize placeholder roadmap.md ([7a018e3](https://github.com/noclocks/template-react-ts-starter/commit/7a018e3852d476cc3227a705a6ce54a54ea59017))  - (Jimmy Briggs)
+- Add techstack.md to docs ([bd89785](https://github.com/noclocks/template-react-ts-starter/commit/bd8978561e60bab9a107e4105fe371ff7489737b))  - (Jimmy Briggs)
+- Update and enhance README ([5360c48](https://github.com/noclocks/template-react-ts-starter/commit/5360c48ae61b21dc5dee8a57878176555fca4b52))  - (Jimmy Briggs)
 - Add setup docs ([9ae9f94](https://github.com/noclocks/template-react-ts-starter/commit/9ae9f94823ad198251b1abc6c039df0035529035))  - (Jimmy Briggs)
 
 ## Features
@@ -23,6 +26,7 @@
 
 ## Testing
 
+- Add final codecov report ([1596212](https://github.com/noclocks/template-react-ts-starter/commit/159621211042dc23666b151ca7de1487c09ad682))  - (Jimmy Briggs)
 - Add code coverage ([45bd773](https://github.com/noclocks/template-react-ts-starter/commit/45bd7731e42f685c9eb9746ece440d85c552dab8))  - (Jimmy Briggs)
 - Add App default tests ([bb235f1](https://github.com/noclocks/template-react-ts-starter/commit/bb235f1969caef0443867c9053f37ce0b59212bf))  - (Jimmy Briggs)
 - Add setup tests script ([d9864d3](https://github.com/noclocks/template-react-ts-starter/commit/d9864d327f778e24c48db6185f977ec4d77a2b9a))  - (Jimmy Briggs)
