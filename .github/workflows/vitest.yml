@@ -9,11 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    branch:
-    #      - ${{ github.head_ref }}
-    #      - "main"
+    strategy:
+      matrix:
+        branch:
+          - ${{ github.head_ref }}
+          - "main"
 
     permissions:
       # Required to checkout the code
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }} # ${{ matrix.branch }}
+        ref: ${{ matrix.branch }}
     - name: Prepare Name for Artifacts
       id: prep_artifact_name
       run: |
@@ -34,26 +34,45 @@ jobs:
         # in artifact names, and also whitespace and dashes, into a
         # single dash character.  The unique string will appear as
         # the environment variable ARTIFACT_NAME in subsequent actions.
-        if [ "${{ matrix.container }}" != "" ] ; then
-          name="${{ matrix.container }}"
+        if [ "${{ matrix.branch }}" != "" ] ; then
+          name="${{ matrix.branch }}"
         else
-          name="${{ matrix.os }}"
+          name="${{ github.head_ref }}"
         fi
         # The option to enable + in sed regexps differs by OS so we avoid it
         name=$(echo -n "$name" | sed -e 's/[ \t:\/\\"<>|*?]/-/g' -e 's/--*/-/g')
+        # Add 'coverage-'
+        name="coverage-$name"
+        # Push to Env
         echo "ARTIFACT_NAME=$name" >> $GITHUB_ENV
     - name: 'Install Node'
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-    - name: 'Install Deps'
-      run: npm install
-    - name: 'Test'
-      run: npx vitest --coverage.enabled true
+    - name: 'Install pnpm'
+      uses: pnpm/action-setup@v3
+      with:
+        version: 8
+        run_install: false
+    - name: Get pnpm store
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    - name: Setup cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+    - name: Install dependencies
+      run: pnpm install
+    - name: Run Vitest
+      run: pnpm run npx vitest --coverage.enabled true
     - name: 'Upload Coverage'
       uses: actions/upload-artifact@v4
       with:
-        name: "${{ env.ARTIFACT_NAME }}-test-coverage" # ${{ matrix.branch }}
+        name: "${{ env.ARTIFACT_NAME }}"
         path: coverage
   report:
     needs: test
@@ -62,14 +81,14 @@ jobs:
       - name: 'Download Coverage Artifacts'
         uses: actions/download-artifact@v4
         with:
-          name: "${{ env.ARTIFACT_NAME }}-test-coverage"
+          name: "${{ env.ARTIFACT_NAME }}"
           path: coverage
-      - name: 'Retrieve main Coverage Artifacts'
+      - name: 'Retrieve "main" Coverage Artifacts'
         uses: actions/download-artifact@v4
         with:
           name: coverage-main
-          path: coverage-main
+          path: coverage
       - name: "Report Coverage"
         uses: davelosert/vitest-coverage-report-action@v2
         with:
-          json-summary-compare-path: coverage-main/coverage-summary.json
+          json-summary-compare-path: coverage/coverage-summary.json
