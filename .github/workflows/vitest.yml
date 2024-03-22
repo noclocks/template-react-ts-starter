@@ -9,11 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch:
-          - ${{ github.head_ref }}
-          - "main"
+    #strategy:
+    #  matrix:
+    #    branch:
+    #      - ${{ github.head_ref }}
+    #      - "main"
 
     permissions:
       # Required to checkout the code
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: ${{ matrix.branch }}
+        ref: ${{ github.head_ref }} # ${{ matrix.branch }}
     - name: Prepare Name for Artifacts
       id: prep_artifact_name
       run: |
