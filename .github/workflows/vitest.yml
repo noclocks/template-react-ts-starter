@@ -59,7 +59,7 @@ jobs:
       run: |
         echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
     - name: Setup cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ env.STORE_PATH }}
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -89,6 +89,11 @@ jobs:
           name: coverage-main
           path: coverage
       - name: "Report Coverage"
+        if: always()
         uses: davelosert/vitest-coverage-report-action@v2
         with:
-          json-summary-compare-path: coverage/coverage-summary.json
+          json-summary-path: ${working-directory}/coverage/coverage-summary.json
+          json-final-path: ${working-directory}/coverage/coverage-final.json
+          vite-config-path: ${working-directory}/vite.config.ts
+          # json-summary-compare-path: coverage/coverage-main.json
+          file-coverage-mode: changes
