@@ -68,7 +68,7 @@ jobs:
     - name: Install dependencies
       run: pnpm install
     - name: Run Vitest
-      run: pnpm run npx vitest --coverage.enabled true
+      run: pnpm run test:coverage
     - name: 'Upload Coverage'
       uses: actions/upload-artifact@v4
       with:
