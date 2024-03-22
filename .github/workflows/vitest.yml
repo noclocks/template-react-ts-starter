@@ -38,7 +38,7 @@ jobs:
       - name: 'Upload Coverage'
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ github.head_ref }}
+          name: coverage-${{ matrix.branch.replace('/', '-') }}
           path: coverage
   report:
     needs: test
