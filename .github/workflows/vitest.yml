@@ -9,11 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch:
-          - ${{ github.head_ref }}
-          - 'main'
+    #strategy:
+    #  matrix:
+    #    branch:
+    #      - ${{ github.head_ref }}
+    #      - "main"
 
     permissions:
       # Required to checkout the code
@@ -22,24 +22,39 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ matrix.branch }}
-      - name: 'Install Node'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-      - name: 'Install pnpm'
-        run: npm install -g pnpm
-      - name: 'Install Deps'
-        run: pnpm install
-      - name: 'Test'
-        run: pnpx vitest --coverage.enabled true
-      - name: 'Upload Coverage'
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-${{ matrix.branch.replace('/', '-') }}
-          path: coverage
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }} # ${{ matrix.branch }}
+    - name: Prepare Name for Artifacts
+      id: prep_artifact_name
+      run: |
+        # Calculate a unique string which applies to the matrix entry
+        # that we can use to construct unique and valid artifact names.
+        # We achieve that by squashing runs of characters are invalid
+        # in artifact names, and also whitespace and dashes, into a
+        # single dash character.  The unique string will appear as
+        # the environment variable ARTIFACT_NAME in subsequent actions.
+        if [ "${{ matrix.container }}" != "" ] ; then
+          name="${{ matrix.container }}"
+        else
+          name="${{ matrix.os }}"
+        fi
+        # The option to enable + in sed regexps differs by OS so we avoid it
+        name=$(echo -n "$name" | sed -e 's/[ \t:\/\\"<>|*?]/-/g' -e 's/--*/-/g')
+        echo "ARTIFACT_NAME=$name" >> $GITHUB_ENV
+    - name: 'Install Node'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    - name: 'Install Deps'
+      run: npm install
+    - name: 'Test'
+      run: npx vitest --coverage.enabled true
+    - name: 'Upload Coverage'
+      uses: actions/upload-artifact@v4
+      with:
+        name: "${{ env.ARTIFACT_NAME }}-test-coverage" # ${{ matrix.branch }}
+        path: coverage
   report:
     needs: test
     runs-on: ubuntu-latest
@@ -47,13 +62,14 @@ jobs:
       - name: 'Download Coverage Artifacts'
         uses: actions/download-artifact@v4
         with:
-          name: coverage-${{ github.head_ref }}
+          name: "${{ env.ARTIFACT_NAME }}-test-coverage"
           path: coverage
-      - uses: actions/download-artifact@v4
+      - name: 'Retrieve main Coverage Artifacts'
+        uses: actions/download-artifact@v4
         with:
           name: coverage-main
           path: coverage-main
-      - name: 'Report Coverage'
+      - name: "Report Coverage"
         uses: davelosert/vitest-coverage-report-action@v2
         with:
           json-summary-compare-path: coverage-main/coverage-summary.json
