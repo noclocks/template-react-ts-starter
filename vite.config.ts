@@ -14,6 +14,7 @@ export default defineConfig({
     setupFiles: ['./tests/setupTests.ts'],
     watch: false,
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'json-summary', 'json'],
       reportOnFailure: true,
     },
