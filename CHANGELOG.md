@@ -9,6 +9,8 @@
 ## Bug Fixes
 
 - Fix vitest.yml ([d181ca1](https://github.com/noclocks/template-react-ts-starter/commit/d181ca1ee26b9134a43bbbb52713fa810ee13bd1))  - (Jimmy Briggs)
+- Fix vitest.yml and add pnpm setup and cache ([557efea](https://github.com/noclocks/template-react-ts-starter/commit/557efeacdfa0fd6628a625623ce1077a5d45a7e4))  - (Jimmy Briggs)
+- Fix vitest.yml ([ecce8d0](https://github.com/noclocks/template-react-ts-starter/commit/ecce8d0fc6f993818b73b7482712b7964a40e3a7))  - (Jimmy Briggs)
 
 ## [1.0.0](https://github.com/noclocks/template-react-ts-starter/tree/v1.0.0)- (2024-03-15)
 
