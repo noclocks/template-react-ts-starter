@@ -71,7 +71,7 @@ if you do not have the GitHub CLI installed, you can use the following command:
 
 ```bash
 # assuming project name is: my-new-project
-npx degit noclocks/template-react-ts-starter my-new-project
+pnpm dlx degit noclocks/template-react-ts-starter my-new-project
 ```
 
 Change into the new project directory:
