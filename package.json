@@ -5,7 +5,7 @@
   "type": "module",
   "license": "See LICENSE.md",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "pnpm dlx only-allow pnpm",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
