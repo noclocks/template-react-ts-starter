@@ -95,5 +95,5 @@ jobs:
           json-summary-path: coverage/coverage-summary.json
           json-final-path: coverage/coverage-final.json
           vite-config-path: vite.config.ts
-          # json-summary-compare-path: coverage/coverage-main.json
           file-coverage-mode: changes
+          # json-summary-compare-path: coverage/coverage-main.json

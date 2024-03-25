@@ -6,6 +6,12 @@
 
 ## [Unreleased]
 
+## Bug Fixes
+
+- Fix vitest.yml ([d181ca1](https://github.com/noclocks/template-react-ts-starter/commit/d181ca1ee26b9134a43bbbb52713fa810ee13bd1))  - (Jimmy Briggs)
+
+## [1.0.0](https://github.com/noclocks/template-react-ts-starter/tree/v1.0.0)- (2024-03-15)
+
 ## Configuration
 
 - Add prettier config ([a4eade6](https://github.com/noclocks/template-react-ts-starter/commit/a4eade62fefb91906075aee1c60d91a7070f4580))  - (Jimmy Briggs)
